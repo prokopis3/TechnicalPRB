@@ -5,6 +5,13 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# pem, csr crt, key, srl, cnf, .txt.attr txt
+*.pem
+*.attr
+*.txt
+*.cnf
+*.srl
+
 # Runtime data
 pids
 *.pid
@@ -25,6 +32,13 @@ coverage
 
 # Bower dependency directory (https://bower.io/)
 bower_components
+components/
+
+# Styles bs
+# styles/bs/
+
+# Javascript files
+# public/*.js
 
 # node-waf configuration
 .lock-wscript
@@ -57,3 +71,4 @@ typings/
 # dotenv environment variables file
 .env
 
+package-lock.json

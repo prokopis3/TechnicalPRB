@@ -1,0 +1,1 @@
+"use strict";var currentPrice=99;module.exports=function(appio){return module={},module.setSock=function(appio){module.io=appio,module.io.set("origins","*:*"),module.io.sockets.on("connection",function(socket){console.log("Server Side socket connected"),socket.emit("priceUpdate",currentPrice)})},module};

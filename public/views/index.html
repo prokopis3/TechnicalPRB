@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en" >
+  <head>
+    <base href="/">
+    <title>Technical PRB Plumbing Services London</title>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, shrink-to-fit=no, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    
+    <script src="https://www.google.com/recaptcha/api.js?render=explicit&amp;onload=onloadCallback"></script>
+  
+    <!-- Material Design Lite Icons  -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+    
+    <!-- Custom Style  -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- <link rel="icon" href="https://localhost/favicon.ico?v=2" /> -->
+    <!-- Polyfill(s) for older browsers -->
+    <!-- <script src="/socket.io/socket.io.js"></script> -->
+    <script src="node_modules/core-js/client/shim.min.js"></script>
+    <script src="node_modules/zone.js/dist/zone.js"></script>
+    <script src="node_modules/reflect-metadata/Reflect.js"></script>
+    <script src="node_modules/systemjs/dist/system.src.js"></script>
+
+    <script src="gl1.js"></script>
+    <script src="gl2.js"></script> 
+
+    <script>
+       function onloadCallback() {
+          System.import('app').catch( (err) => { console.error(err) })
+       }
+    </script>
+  </head>
+
+  <body >
+    <!-- MDBootstrap core JavaScript -->
+    <!-- <script type="text/javascript" src="components/MDBootstrap/js/mdb.min.js" crossorigin="anonymous"></script> -->
+    <prb>
+      <div class="loader" style="background-image: url(img/Photos/giphy.gif); background-repeat: no-repeat; 
+      background-size: 100px 100px; background-position: center center; height: auto; ">
+        <canvas width="100px" height="480px" id="loader"></canvas>
+        <!-- <h1>Welcome..</h1> -->
+      </div>
+    </prb>
+  </body>
+
+  <script>
+    // WOW Animation Init
+    // Attach scrollSpy to .wow elements for detect view exit events,
+    // then reset elements and add again for animation
+  
+
+    Loadr = new (function Loadr(id){
+        // # Defines
+        const max_size = 24;
+        const max_particles = 1500;
+        const min_vel = 20;
+        const max_generation_per_frame = 10;
+
+        // #Variables
+    // sometimes i wrote code horrible enouhg to make eyes bleed 
+        var canvas = document.getElementById(id);
+        var ctx = canvas.getContext('2d');
+        var height = canvas.height;
+        var center_y = height/2;
+        var width = canvas.width;
+        var center_x = width / 2;
+        var animate = true;
+        var particles = [];
+        var last = Date.now(),now = 0;
+        var died = 0,len = 0,dt;
+
+        function isInsideHeart(x,y){
+            x = ((x - center_x) / (center_x)) * 3;
+            y = ((y - center_y) / (center_y)) * -3;
+            // Simplest Equation of lurve
+            var x2 = x * x;
+          var y2 = y * y;
+          // Simplest Equation of lurve
+        
+      return (Math.pow((x2 + y2 - 1), 3) - (x2 * (y2 * y)) < 0);
+        
+    }
+        
+    function random(size,freq){
+            var val = 0;
+            var iter = freq;
+            
+      do{
+                size /= iter;
+                iter += freq;
+                val += size * Math.random();
+            }while( size >= 1);
+            
+      return val;
+        }
+      
+        function Particle(){
+            var x = center_x;
+            var y = center_y;
+            var size = ~~random(max_size,2.4);
+            var x_vel = ((max_size + min_vel) - size)/2 - (Math.random() * ((max_size + min_vel) - size));
+            var y_vel = ((max_size + min_vel) - size)/2 - (Math.random() * ((max_size + min_vel) - size));
+            var nx = x;
+      var ny = y;
+      var r,g,b,a = 0.05 * size;
+      
+      this.draw = function(){
+        r = ~~( 255 * ( x / width));
+        g = ~~( 255 * (1 - ( y / height)));
+        b = ~~( 255 - r );
+        ctx.fillStyle = 'rgba(' + r + ',' + g + ',' + b + ',' + a + ')';
+        ctx.beginPath();
+        ctx.arc(x,y,size,0, Math.PI*2, true); 
+        ctx.closePath();
+        ctx.fill();
+      }
+
+            this.move = function(dt){
+
+        nx += x_vel * dt;
+        ny += y_vel * dt;
+        if( !isInsideHeart(nx,ny)){
+          if( !isInsideHeart(nx,y)){
+            x_vel *= -1;
+            return;
+          }
+                  
+          if( !isInsideHeart(x,ny)){
+                          y_vel *= -1;
+                          return;
+                    }
+          // Lets do the crazy furbidden
+          x_vel = -1 * y_vel;
+          y_vel = -1 * x_vel;
+          return;
+        }
+              
+                x = nx;
+                y = ny;
+            }
+
+        }
+        
+    function movementTick(){
+        var len = particles.length;
+            var dead = max_particles - len;
+            for( var i = 0; i < dead && i < max_generation_per_frame; i++ ){
+                particles.push(new Particle());
+            }
+          
+      // Update the date
+      now = Date.now();
+      dt = last - now;
+      dt /= 1000;
+      last = now;
+      particles.forEach(function(p){
+        p.move(dt);
+      });
+    }
+      
+    function tick(){
+
+        ctx.clearRect(0,0,width,height);
+        particles.forEach(function(p){
+        p.draw();
+      });
+
+        requestAnimationFrame(tick);
+    }
+        
+    this.start = function(){
+
+        }
+        
+    this.done = function(){}
+
+    // setInterval(movementTick,16);
+    // tick();
+
+    $('body').css('background-color', '#00685c')
+
+    })("loader");
+  </script>
+  <script>
+  
+  // new WOW().init();
+  var wow = new WOW(
+    {
+      boxClass:     'wow',      // animated element css class (default is wow)
+      animateClass: 'animated', // animation css class (default is animated)
+      offset:       100,          // distance to the element when triggering the animation (default is 0)
+      mobile:       true,       // trigger animations on mobile devices (default is true)
+      live:         true,       // act on asynchronously loaded content (default is true)
+      callback:     function(box) {
+        // the callback is fired every time an animation is started
+        // the argument that is passed in is the DOM node being animated
+        // console.log("WOW: animating <" + box.tagName.toLowerCase() + ">")
+        // console.log(JSON.stringify(wow))
+      },
+      scrollContainer: null // optional scroll container selector, otherwise use window
+    }
+  );
+      wow.init(); 
+   if ($('.wow').hasClass('animated')) {
+            $(this).removeClass('animated');
+            $(this).removeAttr('style');
+           
+   }
+  </script>
+
+  
+</html>

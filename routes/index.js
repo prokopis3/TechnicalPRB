@@ -1,0 +1,1 @@
+"use strict";function LoginPageCheck(req,res,next){req.isAuthenticated()?res.redirect("/"):res.json({pol:"rest"})}var express=require("express"),router=express.Router();router.get("/login",LoginPageCheck),module.exports=router;
