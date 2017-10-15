@@ -37,7 +37,7 @@
     "session-mongoose": "^0.5.2",
     "socket.io": "^2.0.3"
   },
-  "devDependencies": {
+  /* "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-preset-es2015": "^6.24.1",
@@ -68,6 +68,6 @@
     "typescript": "^2.5.2",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0"
-  },
+  }, */
   "keywords": []
 }
