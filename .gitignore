@@ -38,7 +38,7 @@ components/
 # styles/bs/
 
 # Javascript files
-# public/*.js
+public/*.js*
 
 # node-waf configuration
 .lock-wscript
@@ -71,4 +71,4 @@ typings/
 # dotenv environment variables file
 .env
 
-package-lock.json
+package-lock*

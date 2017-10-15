@@ -2,9 +2,9 @@
   "name": "technicalprb",
   "version": "1.0.0",
   "description": "Technical Plumbing Support Team",
-  "main": "bin/www_NoSSL",
+  "main": "bin/www",
   "scripts": {
-    "start": "node ./bin/www_NoSSL",
+    "start": "node index.js",
     "dev": "node ./bin/www_NoSSL",
     "production": "node ../technicalprb/bin/www"
   },
