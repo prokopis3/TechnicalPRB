@@ -6,7 +6,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # pem, csr crt, key, srl, cnf, .txt.attr txt
-*.pem
+# *.pem
 *.attr
 *.txt
 *.cnf
